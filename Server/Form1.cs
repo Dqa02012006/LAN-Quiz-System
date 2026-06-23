@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace Server
 {
@@ -21,6 +22,7 @@ namespace Server
         public Form1()
         {
             InitializeComponent();
+            LoadQuestionsFromFile();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,20 +45,46 @@ namespace Server
             dgvStudents.Columns.Add("Time", "Thời gian");
             dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        public class QuestionItem
+        {
+            public string ID { get; set; } = "";
+            public string Question { get; set; } = "";
+            public List<string> Options { get; set; } = new List<string>(); // Sửa thành List ở đây
+            public string Answer { get; set; } = "";
+        }
 
+        // 2. Hàm đọc file JSON và nạp vào bảng hiển thị
         private void LoadQuestionsFromFile()
         {
-            string path = "questions.txt";
+            string path = "question.json";
             if (File.Exists(path))
             {
-                dgvQuestions.Rows.Clear();
-                var lines = File.ReadAllLines(path);
-                foreach (var line in lines)
+                try
                 {
-                    var p = line.Split('|');
-                    if (p.Length >= 4) dgvQuestions.Rows.Add(p[0], p[1], p[2], p[3]);
+                    dgvQuestions.Rows.Clear();
+                    string jsonString = File.ReadAllText(path);
+
+                    var options = new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    var questions = System.Text.Json.JsonSerializer.Deserialize<List<QuestionItem>>(jsonString, options);
+
+                    if (questions != null)
+                    {
+                        foreach (var q in questions)
+                        {
+                            // Nạp vào bảng DataGridView của bạn: Cột ID, Cột Nội dung câu hỏi, Cột Đáp án đúng
+                            dgvQuestions.Rows.Add(q.ID, q.Question, q.Answer);
+                        }
+                        WriteLog($"Đã load thành công {questions.Count} câu hỏi từ file JSON.");
+                    }
                 }
-                WriteLog("Đã load câu hỏi từ file.");
+                catch (Exception ex)
+                {
+                    WriteLog("Lỗi đọc file JSON: " + ex.Message);
+                }
+            }
+            else
+            {
+                WriteLog("Không tìm thấy file question.json ở thư mục chạy ứng dụng!");
             }
         }
 

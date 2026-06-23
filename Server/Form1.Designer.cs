@@ -146,6 +146,7 @@
             // 
             rtbLog.BackColor = Color.Black;
             rtbLog.Dock = DockStyle.Fill;
+            rtbLog.ForeColor = Color.White;
             rtbLog.Location = new Point(3, 23);
             rtbLog.Name = "rtbLog";
             rtbLog.ReadOnly = true;
