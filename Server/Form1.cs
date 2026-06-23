@@ -49,7 +49,7 @@ namespace Server
         {
             public string ID { get; set; } = "";
             public string Question { get; set; } = "";
-            public List<string> Options { get; set; } = new List<string>(); // Sửa thành List ở đây
+            public List<string> Options { get; set; } = new List<string>();
             public string Answer { get; set; } = "";
         }
 
