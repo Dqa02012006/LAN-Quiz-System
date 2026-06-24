@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace wr
@@ -16,7 +13,9 @@ namespace wr
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            // Truyền 3 tham số mặc định để sửa lỗi biên dịch
+            Application.Run(new Form1("Thí sinh", "127.0.0.1", "9999"));
         }
     }
 }

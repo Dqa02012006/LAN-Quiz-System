@@ -7,26 +7,41 @@ namespace wr
 {
     public partial class Form1 : Form
     {
-        // Góc bắt đầu của vòng tròn xoay hoạt họa
         private float startAngle = 0;
 
-        public Form1()
+        // Các biến lưu trữ thông tin đăng nhập phục vụ vẽ đồ họa
+        private string studentName = "Thí sinh";
+        private string serverIP = "127.0.0.1";
+        private string serverPort = "9999";
+
+        // Hàm khởi tạo nhận chuẩn 3 tham số thô từ Form Login truyền sang
+        public Form1(string loginName, string ip, string port)
         {
             InitializeComponent();
 
-            // Bật bộ đệm đôi tránh nhấp nháy màn hình khi vẽ lại liên tục
+            if (!string.IsNullOrEmpty(loginName)) this.studentName = loginName;
+            if (!string.IsNullOrEmpty(ip)) this.serverIP = ip;
+            if (!string.IsNullOrEmpty(port)) this.serverPort = port;
+
+            // Bật Double Buffered để vòng xoay loading không bị nhấp nháy
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
         }
 
-        // 1. ĐÂY LÀ HÀM SỰ KIỆN LOAD CỦA FORM
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Ủy quyền các hàm tự vẽ đồ họa nâng cao
             pnlLoadingContainer.Paint += PnlLoadingContainer_Paint;
             pnlCard.Paint += PnlCard_Paint;
+
+            lblStudentVal.Text = studentName;
+            lblIpVal.Text = serverIP;
+            lblPortVal.Text = serverPort;
+            // Đổi chữ "Xin chào..." ở tiêu đề tĩnh phía trên (nếu có dùng Label)
+            if (this.Controls.Find("lblWelcome", true).Length > 0)
+            {
+                this.Controls.Find("lblWelcome", true)[0].Text = $"Xin chào, {this.studentName}";
+            }
         }
 
-        // 2. ĐÂY LÀ HÀM SỰ KIỆN TICK CỦA TIMER
         private void tmrLoading_Tick(object sender, EventArgs e)
         {
             startAngle += 6;
@@ -34,10 +49,9 @@ namespace wr
             {
                 startAngle = 0;
             }
-            pnlLoadingContainer.Invalidate(); // Yêu cầu panel vẽ lại
+            pnlLoadingContainer.Invalidate();
         }
 
-        // Vẽ đồ họa vòng tròn loading mượt mà không răng cưa
         private void PnlLoadingContainer_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -46,13 +60,11 @@ namespace wr
             int diameter = Math.Min(pnlLoadingContainer.Width, pnlLoadingContainer.Height) - 10;
             Rectangle rect = new Rectangle(5, 5, diameter, diameter);
 
-            // Vẽ vòng tròn mờ phía dưới làm nền
             using (Pen trackPen = new Pen(Color.FromArgb(235, 232, 249), 6))
             {
                 g.DrawEllipse(trackPen, rect);
             }
 
-            // Vẽ vòng cung màu tím chuyển động phía trên
             using (Pen indicatorPen = new Pen(Color.FromArgb(138, 43, 226), 6))
             {
                 indicatorPen.StartCap = LineCap.Round;
@@ -61,13 +73,14 @@ namespace wr
             }
         }
 
-        // Tạo bo góc mịn cho Panel thông tin màu trắng và vẽ các đường chia hàng
+        // Vẽ cấu trúc bo góc khung Card và vẽ đè nội dung thông tin đăng nhập lên
         private void PnlCard_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            int radius = 20; // Độ bo tròn góc
+            int radius = 20;
             Rectangle rect = new Rectangle(0, 0, pnlCard.Width - 1, pnlCard.Height - 1);
 
             using (GraphicsPath cardPath = new GraphicsPath())
@@ -78,22 +91,29 @@ namespace wr
                 cardPath.AddArc(rect.X, rect.Y + rect.Height - radius, radius, radius, 90, 90);
                 cardPath.CloseAllFigures();
 
-                pnlCard.Region = new Region(cardPath);
 
-                // Vẽ viền nhạt bao xung quanh card để tạo chiều sâu
+
                 using (Pen borderPen = new Pen(Color.FromArgb(228, 230, 235), 1))
                 {
                     g.DrawPath(borderPen, cardPath);
                 }
             }
 
-            // Vẽ 3 đường kẻ ngang màu xám nhạt để chia rõ thông tin
+            // Vẽ 3 đường kẻ ngang màu xám nhạt làm nền chia thông tin
             using (Pen linePen = new Pen(Color.FromArgb(242, 243, 245), 1.5f))
             {
-                g.DrawLine(linePen, 30, 225, pnlCard.Width - 30, 225);
-                g.DrawLine(linePen, 30, 272, pnlCard.Width - 30, 272);
-                g.DrawLine(linePen, 30, 318, pnlCard.Width - 30, 318);
+                g.DrawLine(linePen, 30, 220, pnlCard.Width - 30, 220);
+                g.DrawLine(linePen, 30, 268, pnlCard.Width - 30, 268);
+                g.DrawLine(linePen, 30, 316, pnlCard.Width - 30, 316);
             }
+
+            // VẼ CHỮ ĐỘNG: Định vị tọa độ X xuất phát từ 135 để thẳng hàng tuyệt đối với chữ tĩnh của bạn
+            // VẼ CHỮ ĐỘNG: Cấu hình chuẩn để hiển thị trọn vẹn họ tên tiếng Việt dài
+        }
+
+        private void pnlCard_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

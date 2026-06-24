@@ -216,7 +216,7 @@
             this.pnlCard.Name = "pnlCard";
             this.pnlCard.Size = new System.Drawing.Size(500, 390);
             this.pnlCard.TabIndex = 3;
-            // 
+            this.pnlCard.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlCard_Paint);            // 
             // lblPortVal
             // 
             this.lblPortVal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
