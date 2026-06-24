@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="../LAN-Quiz-System/Client/Quiz/Quiz.csproj" />
-  <Project Path="../LAN-Quiz-System/Client/wr/wr.csproj" />
-  <Project Path="../LAN-Quiz-System/Server/Server.csproj" />
-</Solution>
