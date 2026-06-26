@@ -1,0 +1,92 @@
+[
+  {
+    "Id": "1",
+    "Question": "Socket là gì?",
+    "A": "Một giao thức mạng",
+    "B": "Điểm cuối của quá trình giao tiếp giữa hai máy tính qua mạng",
+    "C": "Một loại cơ sở dữ liệu",
+    "D": "Một hệ điều hành",
+    "Answer": "B"
+  },
+  {
+    "Id": "2",
+    "Question": "Giao thức nào đảm bảo dữ liệu được truyền tin cậy và đúng thứ tự?",
+    "A": "UDP",
+    "B": "IP",
+    "C": "TCP",
+    "D": "HTTP",
+    "Answer": "C"
+  },
+  {
+    "Id": "3",
+    "Question": "UDP có đặc điểm nào sau đây?",
+    "A": "Đảm bảo dữ liệu đến nơi",
+    "B": "Có cơ chế bắt tay kết nối",
+    "C": "Không kết nối và truyền nhanh",
+    "D": "Chỉ dùng cho web",
+    "Answer": "C"
+  },
+  {
+    "Id": "4",
+    "Question": "Cổng mặc định của giao thức HTTP là bao nhiêu?",
+    "A": "21",
+    "B": "25",
+    "C": "80",
+    "D": "443",
+    "Answer": "C"
+  },
+  {
+    "Id": "5",
+    "Question": "Lớp nào trong C# thường được sử dụng để tạo TCP Server?",
+    "A": "TcpListener",
+    "B": "UdpClient",
+    "C": "SocketException",
+    "D": "IPAddress",
+    "Answer": "A"
+  },
+  {
+    "Id": "6",
+    "Question": "Phương thức nào dùng để chấp nhận kết nối từ Client trong TcpListener?",
+    "A": "Connect()",
+    "B": "AcceptTcpClient()",
+    "C": "Receive()",
+    "D": "Send()",
+    "Answer": "B"
+  },
+  {
+    "Id": "7",
+    "Question": "Địa chỉ IP 127.0.0.1 còn được gọi là gì?",
+    "A": "Gateway",
+    "B": "Broadcast",
+    "C": "Loopback (localhost)",
+    "D": "DNS",
+    "Answer": "C"
+  },
+  {
+    "Id": "8",
+    "Question": "Thành phần nào xác định duy nhất một tiến trình mạng trên máy tính?",
+    "A": "Địa chỉ MAC",
+    "B": "Port",
+    "C": "Subnet Mask",
+    "D": "Gateway",
+    "Answer": "B"
+  },
+  {
+    "Id": "9",
+    "Question": "Trong mô hình Client-Server, bên nào chủ động yêu cầu kết nối?",
+    "A": "Server",
+    "B": "Router",
+    "C": "Client",
+    "D": "Switch",
+    "Answer": "C"
+  },
+  {
+    "Id": "10",
+    "Question": "Lớp Socket trong C# thuộc namespace nào?",
+    "A": "System.IO",
+    "B": "System.Text",
+    "C": "System.Net.Sockets",
+    "D": "System.Threading",
+    "Answer": "C"
+  }
+]
