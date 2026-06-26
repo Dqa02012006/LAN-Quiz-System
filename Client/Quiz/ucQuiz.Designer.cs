@@ -36,7 +36,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnNext = new System.Windows.Forms.Button();
             this.rdoD = new System.Windows.Forms.RadioButton();
             this.rdoC = new System.Windows.Forms.RadioButton();
             this.rdoB = new System.Windows.Forms.RadioButton();
@@ -66,12 +65,14 @@
             // 
             // txtTimer
             // 
+            this.txtTimer.BackColor = System.Drawing.Color.White;
+            this.txtTimer.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtTimer.ForeColor = System.Drawing.Color.Red;
             this.txtTimer.Location = new System.Drawing.Point(188, 89);
             this.txtTimer.Multiline = true;
             this.txtTimer.Name = "txtTimer";
             this.txtTimer.ReadOnly = true;
-            this.txtTimer.Size = new System.Drawing.Size(127, 38);
+            this.txtTimer.Size = new System.Drawing.Size(113, 38);
             this.txtTimer.TabIndex = 4;
             // 
             // label2
@@ -86,18 +87,21 @@
             // 
             // txtStudentInfo
             // 
+            this.txtStudentInfo.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtStudentInfo.Location = new System.Drawing.Point(188, 22);
             this.txtStudentInfo.Multiline = true;
             this.txtStudentInfo.Name = "txtStudentInfo";
             this.txtStudentInfo.ReadOnly = true;
-            this.txtStudentInfo.Size = new System.Drawing.Size(281, 38);
+            this.txtStudentInfo.Size = new System.Drawing.Size(454, 38);
             this.txtStudentInfo.TabIndex = 2;
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.Location = new System.Drawing.Point(658, 35);
+            this.label1.Location = new System.Drawing.Point(648, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(170, 76);
             this.label1.TabIndex = 1;
@@ -115,34 +119,28 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.btnNext);
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.rdoD);
             this.panel2.Controls.Add(this.rdoC);
             this.panel2.Controls.Add(this.rdoB);
             this.panel2.Controls.Add(this.rdoA);
             this.panel2.Controls.Add(this.lblQuestionText);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 156);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(738, 615);
+            this.panel2.Size = new System.Drawing.Size(747, 612);
             this.panel2.TabIndex = 1;
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(588, 542);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(122, 38);
-            this.btnNext.TabIndex = 5;
-            this.btnNext.Text = "Next >";
-            this.btnNext.UseVisualStyleBackColor = true;
             // 
             // rdoD
             // 
+            this.rdoD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rdoD.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.rdoD.Location = new System.Drawing.Point(20, 457);
             this.rdoD.Name = "rdoD";
-            this.rdoD.Size = new System.Drawing.Size(691, 59);
+            this.rdoD.Size = new System.Drawing.Size(700, 59);
             this.rdoD.TabIndex = 4;
             this.rdoD.TabStop = true;
             this.rdoD.Text = "D";
@@ -150,11 +148,13 @@
             // 
             // rdoC
             // 
+            this.rdoC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rdoC.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.rdoC.Location = new System.Drawing.Point(20, 367);
             this.rdoC.Name = "rdoC";
-            this.rdoC.Size = new System.Drawing.Size(690, 59);
+            this.rdoC.Size = new System.Drawing.Size(699, 59);
             this.rdoC.TabIndex = 3;
             this.rdoC.TabStop = true;
             this.rdoC.Text = "C";
@@ -162,11 +162,13 @@
             // 
             // rdoB
             // 
+            this.rdoB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rdoB.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.rdoB.Location = new System.Drawing.Point(20, 279);
             this.rdoB.Name = "rdoB";
-            this.rdoB.Size = new System.Drawing.Size(690, 59);
+            this.rdoB.Size = new System.Drawing.Size(699, 59);
             this.rdoB.TabIndex = 2;
             this.rdoB.TabStop = true;
             this.rdoB.Text = "B";
@@ -174,11 +176,13 @@
             // 
             // rdoA
             // 
+            this.rdoA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rdoA.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.rdoA.Location = new System.Drawing.Point(21, 188);
             this.rdoA.Name = "rdoA";
-            this.rdoA.Size = new System.Drawing.Size(690, 59);
+            this.rdoA.Size = new System.Drawing.Size(699, 59);
             this.rdoA.TabIndex = 1;
             this.rdoA.TabStop = true;
             this.rdoA.Text = "A";
@@ -186,19 +190,22 @@
             // 
             // lblQuestionText
             // 
+            this.lblQuestionText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblQuestionText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.lblQuestionText.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblQuestionText.Location = new System.Drawing.Point(16, 22);
             this.lblQuestionText.Name = "lblQuestionText";
-            this.lblQuestionText.Size = new System.Drawing.Size(695, 145);
+            this.lblQuestionText.Size = new System.Drawing.Size(704, 145);
             this.lblQuestionText.TabIndex = 0;
             this.lblQuestionText.Text = "...";
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.btnFinish);
             this.panel3.Controls.Add(this.flpQuestions);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(753, 156);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(296, 615);
@@ -206,6 +213,7 @@
             // 
             // btnFinish
             // 
+            this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinish.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnFinish.Location = new System.Drawing.Point(83, 462);
             this.btnFinish.Name = "btnFinish";
@@ -257,7 +265,6 @@
         private System.Windows.Forms.RadioButton rdoC;
         private System.Windows.Forms.RadioButton rdoB;
         private System.Windows.Forms.RadioButton rdoA;
-        private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnFinish;
         private System.Windows.Forms.FlowLayoutPanel flpQuestions;
         private System.Windows.Forms.Timer quizTimer;

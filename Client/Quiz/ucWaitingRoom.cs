@@ -1,71 +1,71 @@
 ﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Quiz
 {
     public partial class ucWaitingRoom : UserControl
     {
-        private bool _isListening = true;
+        // Biến để lưu góc xoay của vòng tròn loading
+        private int _spinAngle = 0;
 
         public ucWaitingRoom()
         {
             InitializeComponent();
+
+            // Bật tính năng vẽ mượt mà (Double Buffer) để vòng tròn xoay không bị giật/nháy
+            typeof(Panel).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+                null, pnlLoadingContainer, new object[] { true });
         }
 
-        // Sự kiện chạy ngay khi màn hình Phòng chờ được nạp lên Khung chính
+        // 1. Sự kiện khi Form vừa load lên
         private void ucWaitingRoom_Load(object sender, EventArgs e)
         {
-            // 1. Hiển thị thông tin cá nhân lấy từ kho lưu trữ trung tâm
-            lblWelcome.Text = $"Xin chào thí sinh: {ClientManager.StudentName}!";
-            lblStatus.Text = "Kết nối thành công! Vui lòng đợi giáo viên phát lệnh khai mạc phòng thi...";
+            // Điền dữ liệu vào 3 Label
+            lblStudent.Text = ClientManager.StudentName; // Tên sinh viên
+            lblIp.Text = ClientManager.IPAddress;        // IP Server
+            lblPort.Text = ClientManager.Port;
+            lblWelcome.Text = "Xin chào, " + ClientManager.StudentName;// Port
 
-            // 2. Kích hoạt luồng ngầm liên tục đọc dữ liệu từ Server gửi xuống
-            Task.Run(() => ListenFromServer());
+            // Cài đặt và bật Timer để bắt đầu xoay vòng tròn
+            tmrLoading.Interval = 30; // Tốc độ xoay (để 30 mili-giây là mượt nhất)
+            tmrLoading.Start();
         }
 
-        private void ListenFromServer()
+        // 2. Sự kiện Tick của Timer (Chạy liên tục mỗi 30ms)
+        private void tmrLoading_Tick(object sender, EventArgs e)
         {
-            while (_isListening)
-            {
-                try
-                {
-                    if (ClientManager.Reader != null)
-                    {
-                        // Đọc từng dòng lệnh từ Server
-                        string msg = ClientManager.Reader.ReadLine();
+            // Tăng góc xoay lên 15 độ
+            _spinAngle += 15;
+            if (_spinAngle >= 360) _spinAngle = 0;
 
-                        // Nếu nhận được đúng mật lệnh bắt đầu thi từ Server
-                        if (msg == "START_EXAM")
-                        {
-                            _isListening = false; // Tắt cờ lắng nghe của màn hình này để chuyển giao
+            // Bắt pnlLoadingContainer phải vẽ lại (sẽ gọi xuống hàm Paint bên dưới)
+            pnlLoadingContainer.Invalidate();
+        }
 
-                            // Ép luồng chính (UI Thread) thực hiện đổi màn hình sang ucQuiz
-                            FormMain.Instance.Invoke(new Action(() =>
-                            {
-                                FormMain.Instance.SwitchControl(new ucQuiz());
-                            }));
+        // 3. Sự kiện Vẽ vòng tròn lên Panel
+        private void pnlLoadingContainer_Paint(object sender, PaintEventArgs e)
+        {
+            // Bật chế độ khử răng cưa để vòng tròn tròn trịa, không bị rỗ
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-                            break; // Thoát hẳn vòng lặp lắng nghe của phòng chờ
-                        }
-                    }
-                }
-                catch
-                {
-                    // Trường hợp Server đột ngột sập hoặc ngắt kết nối giữa chừng
-                    _isListening = false;
-                    MessageBox.Show("Mất kết nối với máy chủ thi!", "Lỗi mạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            // Tạo bút vẽ màu Tím (giống màu nút Đăng nhập), độ dày = 6
+            Pen pen = new Pen(Color.FromArgb(102, 0, 255), 6);
 
-                    // Đá thí sinh quay trở về màn hình đăng nhập ban đầu
-                    FormMain.Instance.Invoke(new Action(() =>
-                    {
-                        FormMain.Instance.SwitchControl(new ucLogin());
-                    }));
+            // Bo tròn 2 đầu của nét vẽ
+            pen.StartCap = LineCap.Round;
+            pen.EndCap = LineCap.Round;
 
-                    break;
-                }
-            }
+            // Tạo khung hình chữ nhật để chứa vòng tròn (cách lề 5px)
+            Rectangle rect = new Rectangle(5, 5, pnlLoadingContainer.Width - 10, pnlLoadingContainer.Height - 10);
+
+            // Vẽ một đường cung (arc) từ góc hiện tại, dài 120 độ
+            e.Graphics.DrawArc(pen, rect, _spinAngle, 120);
+
+            // Dọn dẹp bút vẽ khỏi bộ nhớ
+            pen.Dispose();
         }
     }
 }

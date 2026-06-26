@@ -20,6 +20,8 @@ namespace Quiz
         public ucQuiz()
         {
             InitializeComponent();
+            this.Load += ucQuiz_Load;
+            btnFinish.Click += btnFinish_Click;
 
             // Đăng ký sự kiện tích chọn đáp án để cập nhật trạng thái ô lưới bên phải ngay lập tức
             rdoA.CheckedChanged += Radio_CheckedChanged;
@@ -193,17 +195,6 @@ namespace Quiz
             else if (q.UserAnswer == "B") rdoB.Checked = true;
             else if (q.UserAnswer == "C") rdoC.Checked = true;
             else if (q.UserAnswer == "D") rdoD.Checked = true;
-
-            if (_currentIndex == _questions.Count - 1)
-            {
-                btnNext.Text = "Câu cuối";
-                btnNext.Enabled = false;
-            }
-            else
-            {
-                btnNext.Text = "Next >";
-                btnNext.Enabled = true;
-            }
         }
 
         private void Radio_CheckedChanged(object sender, EventArgs e)

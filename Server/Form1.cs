@@ -12,6 +12,7 @@ namespace Server
 {
     // =========================================================================
     // CODE LOGIC GIAO DIỆN CHÍNH SERVER - ĐÃ ĐƯỢC FIX LỖI ĐỒNG BỘ UI & JSON
+    // CẬP NHẬT: THÊM VÒNG LẶP NHẬN ĐIỂM SỐ VÀ TRẠNG THÁI NỘP BÀI TỪ THÍ SINH
     // =========================================================================
     public partial class Form1 : Form
     {
@@ -146,7 +147,7 @@ namespace Server
         }
 
         // =========================================================================
-        // XỬ LÝ ĐĂNG NHẬP CỦA THÍ SINH
+        // XỬ LÝ ĐĂNG NHẬP VÀ LẮNG NGHE TIN NHẮN LIÊN TỤC TỪ THÍ SINH
         // =========================================================================
         private void HandleClientLogin(TcpClient client)
         {
@@ -171,14 +172,57 @@ namespace Server
 
                     LogAction($"LOGIN SUCCESS: {name} ({ip})");
 
-                    // SỬA LỖI 1: Sử dụng Invoke để ép luồng giao diện chính vẽ lại bảng sinh viên, tránh phân mảnh luồng
+                    // Ép luồng giao diện chính vẽ lại bảng sinh viên dgvStudents ban đầu
                     this.Invoke((MethodInvoker)delegate
                     {
                         dgvStudents.Rows.Add(_studentCount, player.FullName, player.ClientID, player.IPAddress, player.Grade, player.Status, DateTime.Now.ToString("HH:mm:ss"));
                     });
+
+                    // 🚀 VÒNG LẶP DUY TRÌ KẾT NỐI: Lắng nghe liên tục các lệnh tiếp theo từ Thí sinh này
+                    string clientMsg;
+                    while (_isRunning && (clientMsg = reader.ReadLine()) != null)
+                    {
+                        if (clientMsg.StartsWith("SUBMIT_SCORE|"))
+                        {
+                            string[] parts = clientMsg.Split('|');
+                            if (parts.Length >= 3)
+                            {
+                                string studentName = parts[1];
+                                string gradeStr = parts[2];
+
+                                // 1. Cập nhật dữ liệu logic trong bộ nhớ Server
+                                if (double.TryParse(gradeStr, out double score))
+                                {
+                                    player.Grade = score;
+                                }
+                                player.Status = "FINISHED";
+
+                                LogAction($"[NỘP BÀI] Thí sinh {studentName} đã hoàn thành bài thi. Điểm: {gradeStr}");
+
+                                // 2. Đồng bộ giao diện bảng dgvStudents an toàn đa luồng (Sử dụng ClientID để định danh chuẩn xác dòng)
+                                this.Invoke((MethodInvoker)delegate
+                                {
+                                    foreach (DataGridViewRow row in dgvStudents.Rows)
+                                    {
+                                        // Cột thứ 3 (index số 2) chính là ClientID (ID_1, ID_2,...)
+                                        if (row.Cells[2].Value != null && row.Cells[2].Value.ToString() == player.ClientID)
+                                        {
+                                            row.Cells[4].Value = gradeStr;      // Cập nhật Cột Grade (index 4)
+                                            row.Cells[5].Value = "FINISHED";  // Cập nhật Cột Status (index 5)
+                                            break;
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
                 }
             }
             catch
+            {
+                // Xử lý khi kết nối của thí sinh bị ngắt đột ngột
+            }
+            finally
             {
                 client?.Close();
             }
@@ -189,7 +233,7 @@ namespace Server
         // =========================================================================
         private void btnStart_Click(object sender, EventArgs e)
         {
-            // SỬA LỖI 3: Quét trực tiếp từ danh sách code dữ liệu gốc (_playersList) thay vì quét trên giao diện ô Grid để chống lỗi đặt tên cột
+            // Quét trực tiếp từ danh sách code dữ liệu gốc (_playersList) thay vì quét trên giao diện ô Grid để chống lỗi đặt tên cột
             bool hasWaitingStudent = false;
 
             lock (_playersList)
@@ -265,7 +309,7 @@ namespace Server
         public string FullName { get; set; }
         public string ClientID { get; set; }
         public string IPAddress { get; set; }
-        public int Grade { get; set; }
+        public double Grade { get; set; } // FIX: Đổi từ int sang double để lấy được điểm số có số thập phân lẻ
         public string Status { get; set; }
 
         private StreamWriter _writer;
@@ -276,7 +320,7 @@ namespace Server
             this.FullName = fullName;
             this.ClientID = clientId;
             this.IPAddress = ipAddress;
-            this.Grade = 0;
+            this.Grade = 0.0;
             this.Status = "WAITING";
             _writer = new StreamWriter(socket.GetStream(), Encoding.UTF8) { AutoFlush = true };
         }

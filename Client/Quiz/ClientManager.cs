@@ -13,6 +13,8 @@ namespace Quiz
         public static StreamReader Reader { get; set; }
         public static StreamWriter Writer { get; set; }
         public static string StudentName { get; set; }
+        public static string IPAddress { get; set; }
+        public static string Port { get; set; }
 
         // 🔥 ĐÂY LÀ HÀM CÒN THIẾU KHIẾN BẠN BỊ BÁO LỖI:
         public static void StartListening()

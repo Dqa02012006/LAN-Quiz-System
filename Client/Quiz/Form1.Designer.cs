@@ -1,13 +1,13 @@
 ﻿namespace Quiz
 {
-    partial class ucLogin
+    partial class Form1
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,16 +20,15 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblFullName = new System.Windows.Forms.Label();
-            this.lblMainTitle = new System.Windows.Forms.Label();
+            this.pnlSidebar = new System.Windows.Forms.Panel();
             this.lblFooterLeft = new System.Windows.Forms.Label();
             this.lblFeature3 = new System.Windows.Forms.Label();
             this.lblFeature2 = new System.Windows.Forms.Label();
@@ -37,45 +36,39 @@
             this.lblSidebarDesc = new System.Windows.Forms.Label();
             this.lblSidebarTitle = new System.Windows.Forms.Label();
             this.lblSidebarSub = new System.Windows.Forms.Label();
+            this.lblLogo = new System.Windows.Forms.Label();
+            this.pnlMain = new System.Windows.Forms.Panel();
+            this.lblFooterRight = new System.Windows.Forms.LinkLabel();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.txtPort = new System.Windows.Forms.TextBox();
             this.lblPort = new System.Windows.Forms.Label();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.lblIP = new System.Windows.Forms.Label();
             this.txtFullName = new System.Windows.Forms.TextBox();
-            this.lblLogo = new System.Windows.Forms.Label();
-            this.lblFooterRight = new System.Windows.Forms.LinkLabel();
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.lblFullName = new System.Windows.Forms.Label();
             this.lblMainDesc = new System.Windows.Forms.Label();
-            this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.txtPort = new System.Windows.Forms.TextBox();
-            this.pnlMain = new System.Windows.Forms.Panel();
+            this.lblMainTitle = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblFullName
+            // pnlSidebar
             // 
-            this.lblFullName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblFullName.AutoSize = true;
-            this.lblFullName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblFullName.ForeColor = System.Drawing.Color.DimGray;
-            this.lblFullName.Location = new System.Drawing.Point(108, 222);
-            this.lblFullName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(87, 23);
-            this.lblFullName.TabIndex = 2;
-            this.lblFullName.Text = "Họ và tên";
-            // 
-            // lblMainTitle
-            // 
-            this.lblMainTitle.AutoSize = true;
-            this.lblMainTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblMainTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(8)))), ((int)(((byte)(44)))));
-            this.lblMainTitle.Location = new System.Drawing.Point(103, 86);
-            this.lblMainTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMainTitle.Name = "lblMainTitle";
-            this.lblMainTitle.Size = new System.Drawing.Size(292, 54);
-            this.lblMainTitle.TabIndex = 0;
-            this.lblMainTitle.Text = "Đăng nhập thi";
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(8)))), ((int)(((byte)(44)))));
+            this.pnlSidebar.Controls.Add(this.lblFooterLeft);
+            this.pnlSidebar.Controls.Add(this.lblFeature3);
+            this.pnlSidebar.Controls.Add(this.lblFeature2);
+            this.pnlSidebar.Controls.Add(this.lblFeature1);
+            this.pnlSidebar.Controls.Add(this.lblSidebarDesc);
+            this.pnlSidebar.Controls.Add(this.lblSidebarTitle);
+            this.pnlSidebar.Controls.Add(this.lblSidebarSub);
+            this.pnlSidebar.Controls.Add(this.lblLogo);
+            this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
+            this.pnlSidebar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSidebar.Name = "pnlSidebar";
+            this.pnlSidebar.Size = new System.Drawing.Size(507, 690);
+            this.pnlSidebar.TabIndex = 0;
             // 
             // lblFooterLeft
             // 
@@ -160,52 +153,6 @@
             this.lblSidebarSub.TabIndex = 1;
             this.lblSidebarSub.Text = "HỆ THỐNG THI TRỰC TUYẾN";
             // 
-            // lblPort
-            // 
-            this.lblPort.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblPort.AutoSize = true;
-            this.lblPort.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblPort.ForeColor = System.Drawing.Color.DimGray;
-            this.lblPort.Location = new System.Drawing.Point(495, 326);
-            this.lblPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(43, 23);
-            this.lblPort.TabIndex = 6;
-            this.lblPort.Text = "Port";
-            // 
-            // txtIP
-            // 
-            this.txtIP.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtIP.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txtIP.Location = new System.Drawing.Point(268, 318);
-            this.txtIP.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(229, 34);
-            this.txtIP.TabIndex = 5;
-            // 
-            // lblIP
-            // 
-            this.lblIP.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblIP.AutoSize = true;
-            this.lblIP.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblIP.ForeColor = System.Drawing.Color.DimGray;
-            this.lblIP.Location = new System.Drawing.Point(108, 326);
-            this.lblIP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblIP.Name = "lblIP";
-            this.lblIP.Size = new System.Drawing.Size(142, 23);
-            this.lblIP.TabIndex = 4;
-            this.lblIP.Text = "Địa chỉ IP Server";
-            // 
-            // txtFullName
-            // 
-            this.txtFullName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtFullName.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txtFullName.Location = new System.Drawing.Point(203, 214);
-            this.txtFullName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(542, 34);
-            this.txtFullName.TabIndex = 3;
-            // 
             // lblLogo
             // 
             this.lblLogo.AutoSize = true;
@@ -217,6 +164,26 @@
             this.lblLogo.Size = new System.Drawing.Size(175, 32);
             this.lblLogo.TabIndex = 0;
             this.lblLogo.Text = "🔮  QuizExam";
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.BackColor = System.Drawing.Color.White;
+            this.pnlMain.Controls.Add(this.lblFooterRight);
+            this.pnlMain.Controls.Add(this.btnLogin);
+            this.pnlMain.Controls.Add(this.txtPort);
+            this.pnlMain.Controls.Add(this.lblPort);
+            this.pnlMain.Controls.Add(this.txtIP);
+            this.pnlMain.Controls.Add(this.lblIP);
+            this.pnlMain.Controls.Add(this.txtFullName);
+            this.pnlMain.Controls.Add(this.lblFullName);
+            this.pnlMain.Controls.Add(this.lblMainDesc);
+            this.pnlMain.Controls.Add(this.lblMainTitle);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(507, 0);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(805, 690);
+            this.pnlMain.TabIndex = 1;
             // 
             // lblFooterRight
             // 
@@ -235,20 +202,83 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(113, 425);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLogin.Location = new System.Drawing.Point(113, 455);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(587, 55);
             this.btnLogin.TabIndex = 8;
             this.btnLogin.Text = "Đăng nhập  →";
             this.btnLogin.UseVisualStyleBackColor = false;
+            // 
+            // txtPort
+            // 
+            this.txtPort.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtPort.Location = new System.Drawing.Point(500, 357);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(199, 34);
+            this.txtPort.TabIndex = 7;
+            // 
+            // lblPort
+            // 
+            this.lblPort.AutoSize = true;
+            this.lblPort.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblPort.ForeColor = System.Drawing.Color.DimGray;
+            this.lblPort.Location = new System.Drawing.Point(495, 326);
+            this.lblPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(43, 23);
+            this.lblPort.TabIndex = 6;
+            this.lblPort.Text = "Port";
+            // 
+            // txtIP
+            // 
+            this.txtIP.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtIP.Location = new System.Drawing.Point(113, 357);
+            this.txtIP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIP.Name = "txtIP";
+            this.txtIP.Size = new System.Drawing.Size(352, 34);
+            this.txtIP.TabIndex = 5;
+            // 
+            // lblIP
+            // 
+            this.lblIP.AutoSize = true;
+            this.lblIP.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblIP.ForeColor = System.Drawing.Color.DimGray;
+            this.lblIP.Location = new System.Drawing.Point(108, 326);
+            this.lblIP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIP.Name = "lblIP";
+            this.lblIP.Size = new System.Drawing.Size(142, 23);
+            this.lblIP.TabIndex = 4;
+            this.lblIP.Text = "Địa chỉ IP Server";
+            // 
+            // txtFullName
+            // 
+            this.txtFullName.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtFullName.Location = new System.Drawing.Point(113, 252);
+            this.txtFullName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(585, 34);
+            this.txtFullName.TabIndex = 3;
+            
+            // 
+            // lblFullName
+            // 
+            this.lblFullName.AutoSize = true;
+            this.lblFullName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblFullName.ForeColor = System.Drawing.Color.DimGray;
+            this.lblFullName.Location = new System.Drawing.Point(108, 222);
+            this.lblFullName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFullName.Name = "lblFullName";
+            this.lblFullName.Size = new System.Drawing.Size(87, 23);
+            this.lblFullName.TabIndex = 2;
+            this.lblFullName.Text = "Họ và tên";
             // 
             // lblMainDesc
             // 
@@ -262,63 +292,31 @@
             this.lblMainDesc.TabIndex = 1;
             this.lblMainDesc.Text = "Nhập thông tin để kết nối đến phòng thi";
             // 
-            // pnlSidebar
+            // lblMainTitle
             // 
-            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(8)))), ((int)(((byte)(44)))));
-            this.pnlSidebar.Controls.Add(this.lblFooterLeft);
-            this.pnlSidebar.Controls.Add(this.lblFeature3);
-            this.pnlSidebar.Controls.Add(this.lblFeature2);
-            this.pnlSidebar.Controls.Add(this.lblFeature1);
-            this.pnlSidebar.Controls.Add(this.lblSidebarDesc);
-            this.pnlSidebar.Controls.Add(this.lblSidebarTitle);
-            this.pnlSidebar.Controls.Add(this.lblSidebarSub);
-            this.pnlSidebar.Controls.Add(this.lblLogo);
-            this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
-            this.pnlSidebar.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(476, 631);
-            this.pnlSidebar.TabIndex = 2;
+            this.lblMainTitle.AutoSize = true;
+            this.lblMainTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblMainTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(8)))), ((int)(((byte)(44)))));
+            this.lblMainTitle.Location = new System.Drawing.Point(103, 86);
+            this.lblMainTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMainTitle.Name = "lblMainTitle";
+            this.lblMainTitle.Size = new System.Drawing.Size(292, 54);
+            this.lblMainTitle.TabIndex = 0;
+            this.lblMainTitle.Text = "Đăng nhập thi";
             // 
-            // txtPort
-            // 
-            this.txtPort.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtPort.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txtPort.Location = new System.Drawing.Point(546, 318);
-            this.txtPort.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(199, 34);
-            this.txtPort.TabIndex = 7;
-            // 
-            // pnlMain
-            // 
-            this.pnlMain.BackColor = System.Drawing.Color.White;
-            this.pnlMain.Controls.Add(this.lblFooterRight);
-            this.pnlMain.Controls.Add(this.btnLogin);
-            this.pnlMain.Controls.Add(this.txtPort);
-            this.pnlMain.Controls.Add(this.lblPort);
-            this.pnlMain.Controls.Add(this.txtIP);
-            this.pnlMain.Controls.Add(this.lblIP);
-            this.pnlMain.Controls.Add(this.txtFullName);
-            this.pnlMain.Controls.Add(this.lblFullName);
-            this.pnlMain.Controls.Add(this.lblMainDesc);
-            this.pnlMain.Controls.Add(this.lblMainTitle);
-            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(476, 0);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(834, 631);
-            this.pnlMain.TabIndex = 3;
-            // 
-            // ucLogin
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1312, 690);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlSidebar);
-            this.Name = "ucLogin";
-            this.Size = new System.Drawing.Size(1310, 631);
-            this.Load += new System.EventHandler(this.ucLogin_Load);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
+            this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "QuizExam System - Đăng nhập";
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebar.PerformLayout();
             this.pnlMain.ResumeLayout(false);
@@ -329,25 +327,25 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblFullName;
-        private System.Windows.Forms.Label lblMainTitle;
-        private System.Windows.Forms.Label lblFooterLeft;
-        private System.Windows.Forms.Label lblFeature3;
-        private System.Windows.Forms.Label lblFeature2;
-        private System.Windows.Forms.Label lblFeature1;
-        private System.Windows.Forms.Label lblSidebarDesc;
-        private System.Windows.Forms.Label lblSidebarTitle;
-        private System.Windows.Forms.Label lblSidebarSub;
-        private System.Windows.Forms.Label lblPort;
-        private System.Windows.Forms.TextBox txtIP;
-        private System.Windows.Forms.Label lblIP;
-        private System.Windows.Forms.TextBox txtFullName;
-        private System.Windows.Forms.Label lblLogo;
-        private System.Windows.Forms.LinkLabel lblFooterRight;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Label lblMainDesc;
         private System.Windows.Forms.Panel pnlSidebar;
-        private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.Label lblLogo;
+        private System.Windows.Forms.Label lblSidebarSub;
+        private System.Windows.Forms.Label lblSidebarTitle;
+        private System.Windows.Forms.Label lblSidebarDesc;
+        private System.Windows.Forms.Label lblFeature1;
+        private System.Windows.Forms.Label lblFeature2;
+        private System.Windows.Forms.Label lblFeature3;
+        private System.Windows.Forms.Label lblFooterLeft;
+        private System.Windows.Forms.Label lblMainTitle;
+        private System.Windows.Forms.Label lblMainDesc;
+        private System.Windows.Forms.Label lblFullName;
+        private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.Label lblIP;
+        private System.Windows.Forms.TextBox txtIP;
+        private System.Windows.Forms.Label lblPort;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.LinkLabel lblFooterRight;
     }
 }

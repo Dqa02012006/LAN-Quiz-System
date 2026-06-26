@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Quiz
 {
@@ -83,6 +84,9 @@ namespace Quiz
                 ClientManager.Reader = tempReader;
                 ClientManager.Writer = tempWriter;
                 ClientManager.StudentName = fullName;
+                ClientManager.StudentName = fullName;
+                ClientManager.IPAddress = ipAddress;
+                ClientManager.Port = portStr;
                 ClientManager.StartListening();
 
                 // Lệnh cho FormMain đổi sang màn hình chờ (ucWaiting)
@@ -93,5 +97,11 @@ namespace Quiz
                 MessageBox.Show("Không kết nối được server!", "Lỗi");
             }
         }
+
+        private void ucLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
