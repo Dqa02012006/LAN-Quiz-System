@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Quiz
 {
@@ -96,12 +97,12 @@ namespace Quiz
                     string objContent = json.Substring(pos + 1, endPos - pos - 1);
 
                     string idStr = GetJsonValue(objContent, "Id");
-                    string text = GetJsonValue(objContent, "Text");
+                    string text = GetJsonValue(objContent, "Question");
                     string a = GetJsonValue(objContent, "A");
                     string b = GetJsonValue(objContent, "B");
                     string c = GetJsonValue(objContent, "C");
                     string d = GetJsonValue(objContent, "D");
-                    string correct = GetJsonValue(objContent, "CorrectAnswer");
+                    string correct = GetJsonValue(objContent, "Answer");
 
                     if (!string.IsNullOrEmpty(text))
                     {
@@ -129,25 +130,24 @@ namespace Quiz
 
         private string GetJsonValue(string block, string key)
         {
-            string searchKey = "\"" + key + "\":";
-            int index = block.IndexOf(searchKey);
-            if (index == -1) return "";
-
-            int start = index + searchKey.Length;
-            string sub = block.Substring(start).Trim();
-
-            if (sub.StartsWith("\""))
+            // Tìm kiếm các giá trị dạng chuỗi (VD: "Question": "Nội dung câu hỏi")
+            // \s* có nghĩa là bỏ qua mọi khoảng trắng thừa
+            string stringPattern = $"\"{key}\"\\s*:\\s*\"(.*?)\"";
+            Match matchStr = Regex.Match(block, stringPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            if (matchStr.Success)
             {
-                int end = sub.IndexOf("\"", 1);
-                if (end == -1) return "";
-                return sub.Substring(1, end - 1);
+                return matchStr.Groups[1].Value.Trim();
             }
-            else
+
+            // Tìm kiếm các giá trị dạng số (VD: "Id": 1)
+            string numPattern = $"\"{key}\"\\s*:\\s*([0-9]+)";
+            Match matchNum = Regex.Match(block, numPattern, RegexOptions.IgnoreCase);
+            if (matchNum.Success)
             {
-                int end = sub.IndexOf(",");
-                if (end == -1) end = sub.Length;
-                return sub.Substring(0, end).Replace("}", "").Trim();
+                return matchNum.Groups[1].Value.Trim();
             }
+
+            return ""; // Trả về rỗng nếu không tìm thấy
         }
 
         // ==========================================
@@ -208,6 +208,10 @@ namespace Quiz
 
         private void Radio_CheckedChanged(object sender, EventArgs e)
         {
+            if (_questions == null || _currentIndex < 0 || _currentIndex >= _questions.Count)
+            {
+                return;
+            }
             RadioButton rdo = sender as RadioButton;
             if (rdo != null && rdo.Checked)
             {

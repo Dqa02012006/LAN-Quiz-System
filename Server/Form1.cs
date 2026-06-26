@@ -9,9 +9,9 @@ using System.Windows.Forms;
 using System.Linq;
 
 namespace Server
-{ 
+{
     // =========================================================================
-    // 2. CODE LOGIC GIAO DIỆN CHÍNH SERVER
+    // CODE LOGIC GIAO DIỆN CHÍNH SERVER - ĐÃ ĐƯỢC FIX LỖI ĐỒNG BỘ UI & JSON
     // =========================================================================
     public partial class Form1 : Form
     {
@@ -19,7 +19,8 @@ namespace Server
         private bool _isRunning = false;
         private List<ClientPlayer> _playersList = new List<ClientPlayer>();
         private int _studentCount = 0;
-        // Hàm tự động đọc file câu hỏi và nạp vào bảng hiển thị của Server
+
+        // SỬA LỖI 2: Sửa lại Key tìm kiếm JSON cho khớp với file questions.json ("Question" và "Answer")
         private void LoadQuestionsToAdminGrid()
         {
             try
@@ -32,7 +33,6 @@ namespace Server
                 if (json.EndsWith("]")) json = json.Substring(0, json.Length - 1);
                 json = json.Trim();
 
-                // ⚠️ LƯU Ý: Thay 'dataGridView2' bằng đúng tên cái bảng bạn vừa xem ở Bước 1 nhé!
                 dgvQuestions.Rows.Clear();
 
                 int pos = 0;
@@ -44,8 +44,8 @@ namespace Server
                     string objContent = json.Substring(pos + 1, endPos - pos - 1);
 
                     string idStr = GetServerJsonValue(objContent, "Id");
-                    string text = GetServerJsonValue(objContent, "Text");
-                    string correct = GetServerJsonValue(objContent, "CorrectAnswer");
+                    string text = GetServerJsonValue(objContent, "Question"); // FIX: Đổi từ "Text" thành "Question"
+                    string correct = GetServerJsonValue(objContent, "Answer");   // FIX: Đổi từ "CorrectAnswer" thành "Answer"
 
                     if (!string.IsNullOrEmpty(text))
                     {
@@ -85,6 +85,7 @@ namespace Server
                 return sub.Substring(0, end).Replace("}", "").Trim();
             }
         }
+
         public Form1()
         {
             InitializeComponent();
@@ -170,8 +171,11 @@ namespace Server
 
                     LogAction($"LOGIN SUCCESS: {name} ({ip})");
 
-                    // Đưa thông tin thí sinh lên bảng hiển thị dgvStudents đúng cấu trúc cột
-                    dgvStudents.Rows.Add(_studentCount, player.FullName, player.ClientID, player.IPAddress, player.Grade, player.Status, DateTime.Now.ToString("HH:mm:ss"));
+                    // SỬA LỖI 1: Sử dụng Invoke để ép luồng giao diện chính vẽ lại bảng sinh viên, tránh phân mảnh luồng
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        dgvStudents.Rows.Add(_studentCount, player.FullName, player.ClientID, player.IPAddress, player.Grade, player.Status, DateTime.Now.ToString("HH:mm:ss"));
+                    });
                 }
             }
             catch
@@ -181,19 +185,22 @@ namespace Server
         }
 
         // =========================================================================
-        // NÚT PHÁT LỆNH START THI (THAY THẾ HOÀN TOÀN .ANY BẰNG FOREACH TRUYỀN THỐNG)
+        // NÚT PHÁT LỆNH START THI
         // =========================================================================
         private void btnStart_Click(object sender, EventArgs e)
         {
-            // Kiểm tra thủ công bằng vòng lặp tránh hoàn toàn lỗi thư viện LINQ .Any()
+            // SỬA LỖI 3: Quét trực tiếp từ danh sách code dữ liệu gốc (_playersList) thay vì quét trên giao diện ô Grid để chống lỗi đặt tên cột
             bool hasWaitingStudent = false;
 
-            foreach (DataGridViewRow row in dgvStudents.Rows)
+            lock (_playersList)
             {
-                if (row.Cells["Status"].Value != null && row.Cells["Status"].Value.ToString() == "WAITING")
+                foreach (var player in _playersList)
                 {
-                    hasWaitingStudent = true;
-                    break; // Tìm thấy rồi thì thoát vòng lặp luôn
+                    if (player.Status == "WAITING")
+                    {
+                        hasWaitingStudent = true;
+                        break;
+                    }
                 }
             }
 
@@ -218,12 +225,12 @@ namespace Server
                 }
             }
 
-            // Đồng bộ cột Trạng thái hiển thị trên giao diện của Server thành EXAMING
+            // Cập nhật lại cột trạng thái (Cột thứ 6 - chỉ số index là 5) hiển thị trên màn hình thành EXAMING
             foreach (DataGridViewRow row in dgvStudents.Rows)
             {
-                if (row.Cells["Status"].Value != null && row.Cells["Status"].Value.ToString() == "WAITING")
+                if (row.Cells[5].Value != null && row.Cells[5].Value.ToString() == "WAITING")
                 {
-                    row.Cells["Status"].Value = "EXAMING";
+                    row.Cells[5].Value = "EXAMING";
                 }
             }
 
@@ -235,7 +242,15 @@ namespace Server
         // =========================================================================
         private void LogAction(string message)
         {
-            txtLog.AppendText($"[{DateTime.Now:HH:mm:ss}] {message}\r\n");
+            // Sử dụng Invoke để hiển thị nhật ký Log an toàn từ mọi luồng mạng
+            if (txtLog.InvokeRequired)
+            {
+                txtLog.Invoke((MethodInvoker)delegate { LogAction(message); });
+            }
+            else
+            {
+                txtLog.AppendText($"[{DateTime.Now:HH:mm:ss}] {message}\r\n");
+            }
         }
 
         private void btnClearLog_Click(object sender, EventArgs e)
@@ -243,6 +258,7 @@ namespace Server
             txtLog.Clear();
         }
     }
+
     public class ClientPlayer
     {
         public TcpClient Socket { get; set; }

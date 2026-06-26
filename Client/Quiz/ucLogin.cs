@@ -83,6 +83,7 @@ namespace Quiz
                 ClientManager.Reader = tempReader;
                 ClientManager.Writer = tempWriter;
                 ClientManager.StudentName = fullName;
+                ClientManager.StartListening();
 
                 // Lệnh cho FormMain đổi sang màn hình chờ (ucWaiting)
                 FormMain.Instance.SwitchControl(new ucWaitingRoom());

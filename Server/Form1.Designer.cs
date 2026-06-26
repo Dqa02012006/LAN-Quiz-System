@@ -48,10 +48,10 @@
             Times = new DataGridViewTextBoxColumn();
             groupBox4 = new GroupBox();
             dgvQuestions = new DataGridView();
+            btnClearLog = new Button();
             ID = new DataGridViewTextBoxColumn();
             Question = new DataGridViewTextBoxColumn();
             Answer = new DataGridViewTextBoxColumn();
-            btnClearLog = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -255,27 +255,6 @@
             dgvQuestions.Size = new Size(923, 178);
             dgvQuestions.TabIndex = 0;
             // 
-            // ID
-            // 
-            ID.HeaderText = "ID";
-            ID.MinimumWidth = 6;
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            // 
-            // Question
-            // 
-            Question.HeaderText = "Question";
-            Question.MinimumWidth = 6;
-            Question.Name = "Question";
-            Question.ReadOnly = true;
-            // 
-            // Answer
-            // 
-            Answer.HeaderText = "Answer";
-            Answer.MinimumWidth = 6;
-            Answer.Name = "Answer";
-            Answer.ReadOnly = true;
-            // 
             // btnClearLog
             // 
             btnClearLog.Location = new Point(24, 572);
@@ -285,6 +264,30 @@
             btnClearLog.Text = "Xóa Log";
             btnClearLog.UseVisualStyleBackColor = true;
             btnClearLog.Click += btnClearLog_Click;
+            // 
+            // ID
+            // 
+            ID.DataPropertyName = "Id";
+            ID.HeaderText = "ID";
+            ID.MinimumWidth = 6;
+            ID.Name = "ID";
+            ID.ReadOnly = true;
+            // 
+            // Question
+            // 
+            Question.DataPropertyName = "Question";
+            Question.HeaderText = "CauHoi";
+            Question.MinimumWidth = 6;
+            Question.Name = "Question";
+            Question.ReadOnly = true;
+            // 
+            // Answer
+            // 
+            Answer.DataPropertyName = "Answer";
+            Answer.HeaderText = "Answer";
+            Answer.MinimumWidth = 6;
+            Answer.Name = "Answer";
+            Answer.ReadOnly = true;
             // 
             // Form1
             // 
@@ -330,9 +333,9 @@
         private DataGridViewTextBoxColumn Times;
         private GroupBox groupBox4;
         private DataGridView dgvQuestions;
+        private Button btnClearLog;
         private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn Question;
         private DataGridViewTextBoxColumn Answer;
-        private Button btnClearLog;
     }
 }
